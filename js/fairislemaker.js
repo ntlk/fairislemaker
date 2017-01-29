@@ -3,13 +3,13 @@ class PatternRepeat {
     this.rows = rows;
     this.stitches = stitches;
     this.data  = new Array(this.rows);
-    for (var row = 0; row < this.rows; row++) {
+    _.times(this.rows, row => {
       var stitches = new Array(this.stitches);
-      for (var stitch = 0; stitch < this.stitches; stitch++) {
+      _.times(this.stitches, stitch => {
         stitches[stitch] = false;
-      }
+      });
       this.data[row] = stitches;
-    }
+    });
   }
 
   getStitch(rowNumber, stitchNumber) {
