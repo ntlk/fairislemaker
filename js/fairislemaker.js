@@ -5,16 +5,23 @@ class FairIsle extends React.Component {
     for (var row = 0; row < props.rows; row++) {
       var stitches = new Array(props.stitches);
       for (var stitch = 0; stitch < props.stitches; stitch++) {
-        stitches[stitch] = Math.random() > 0.5;
+        stitches[stitch] = false;
       }
       pattern[row] = stitches;
     }
 
     this.state = { pattern: pattern };
+    this.stitchClickHandler = this.stitchClickHandler.bind(this);
+  }
+
+  stitchClickHandler(row, stitch) {
+    var pattern = this.state.pattern;
+    pattern[row][stitch] = !pattern[row][stitch];
+    this.setState({ pattern: pattern });
   }
 
   render() {
-    return <Repeat rows={this.props.rows} stitches={this.props.stitches} pattern={this.state.pattern} />;
+    return <Repeat rows={this.props.rows} stitches={this.props.stitches} pattern={this.state.pattern} clickedStitch={this.stitchClickHandler} />;
   }
 }
 
@@ -27,7 +34,7 @@ class Repeat extends React.Component {
 
   clickHandler(row, stitch) {
     return () => {
-      console.log(row, stitch);
+      this.props.clickedStitch(row, stitch);
     }
   }
 
