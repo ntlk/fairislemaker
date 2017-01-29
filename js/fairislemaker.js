@@ -19,15 +19,27 @@ class FairIsle extends React.Component {
 }
 
 class Repeat extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.clickHandler = this.clickHandler.bind(this);
+  }
+
+  clickHandler(row, stitch) {
+    return () => {
+      console.log(row, stitch);
+    }
+  }
+
   render() {
 
     var rows = [];
     for (var row = 0; row < this.props.rows; row++) {
       var stitches = [];
       for (var stitch = 0; stitch < this.props.stitches; stitch++) {
-        var el = <div></div>;
+        var el = <div onClick={this.clickHandler(row, stitch)}></div>;
         if (this.props.pattern[row][stitch]) {
-          el = <div className="pattern-colour"></div>;
+          el = <div className="pattern-colour" onClick={this.clickHandler(row, stitch)}></div>;
         }
         stitches.push(el);
       }
