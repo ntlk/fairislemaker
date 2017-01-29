@@ -59,11 +59,11 @@ class Repeat extends React.Component {
     for (var row = 0; row < this.props.patternRepeat.rows; row++) {
       var stitches = [];
       for (var stitch = 0; stitch < this.props.patternRepeat.stitches; stitch++) {
-        var el = <div onClick={this.clickHandler(row, stitch)}></div>;
+        var classes = '';
         if (this.props.patternRepeat.getStitch(row, stitch)) {
-          el = <div className="pattern-colour" onClick={this.clickHandler(row, stitch)}></div>;
+          classes = 'pattern-colour';
         }
-        stitches.push(el);
+        stitches.push(<div onClick={this.clickHandler(row, stitch)} className={classes}></div>);
       }
       rows.push(<li>{stitches}</li>);
     }
