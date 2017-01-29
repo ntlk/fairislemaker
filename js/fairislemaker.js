@@ -2,24 +2,21 @@ class Pattern {
   constructor(rows, stitches, data) {
     this.rows = rows;
     this.stitches = stitches;
-    this.data = data;
+    this.data  = new Array(this.rows);
+    for (var row = 0; row < this.rows; row++) {
+      var stitches = new Array(this.stitches);
+      for (var stitch = 0; stitch < this.stitches; stitch++) {
+        stitches[stitch] = false;
+      }
+      this.data[row] = stitches;
+    }
   }
 }
 
 class FairIsle extends React.Component {
   constructor(props) {
     super(props);
-    var pattern = new Array(props.rows);
-    for (var row = 0; row < props.rows; row++) {
-      var stitches = new Array(props.stitches);
-      for (var stitch = 0; stitch < props.stitches; stitch++) {
-        stitches[stitch] = false;
-      }
-      pattern[row] = stitches;
-    }
-
-    var pattern = new Pattern(props.rows, props.stitches, pattern);
-
+    var pattern = new Pattern(props.rows, props.stitches);
     this.state = { pattern };
     this.stitchClickHandler = this.stitchClickHandler.bind(this);
   }
