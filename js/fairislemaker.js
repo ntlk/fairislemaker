@@ -33,22 +33,28 @@ class FairIsle extends React.Component {
   }
 }
 
-var Repeat = (props) => {
-  var rows = _.times(props.patternRepeat.rows, row => {
-    var stitches = _.times(props.patternRepeat.stitches, stitch => {
-      var classes = '';
-      if (props.patternRepeat.getStitch(row, stitch)) {
-        classes = 'pattern-colour';
-      }
-      return <div onClick={() => props.clickedStitch(row, stitch)} className={classes}></div>;
-    });
+var Repeat = props =>
+  <ol className="repeat">
+    {
+      _.times(props.patternRepeat.rows, row =>
+        <li>
+          {
+            _.times(props.patternRepeat.stitches, stitch =>
+              <div
+                onClick={() => props.clickedStitch(row, stitch)}
+                className={stitchClass(props.patternRepeat, row, stitch)}>
+              </div>
+            )
+          }
+        </li>
+      )
+    }
+  </ol>;
 
-    return <li>{stitches}</li>;
-  });
-
-  return (
-    <ol className="repeat">
-      {rows}
-    </ol>
-  )
+var stitchClass = (patternRepeat, row, stitch) => {
+  if (patternRepeat.getStitch(row, stitch)) {
+     return 'pattern-colour';
+  } else {
+    return null;
+  }
 }
