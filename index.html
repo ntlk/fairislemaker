@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Fair isle maker</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.18.1/babel.min.js"></script>
+    <script src="https://unpkg.com/react@15/dist/react.min.js"></script>
+    <script src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+    <script src="js/fairislemaker.js" type="text/babel"></script>
+  </head>
+
+  <body>
+
+    <div id="fairisle"></div>
+    <script type="text/babel">
+      ReactDOM.render(
+        <FairIsle/>,
+        document.getElementById('fairisle')
+      );
+    </script>
+  </body>
+</html>
