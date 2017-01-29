@@ -33,16 +33,16 @@ class FairIsle extends React.Component {
   }
 }
 
-var Repeat = props =>
+var Repeat = ({ patternRepeat, clickedStitch }) =>
   <ol className="repeat">
     {
-      _.times(props.patternRepeat.rows, row =>
+      _.times(patternRepeat.rows, row =>
         <li>
           {
-            _.times(props.patternRepeat.stitches, stitch =>
+            _.times(patternRepeat.stitches, stitch =>
               <div
-                onClick={() => props.clickedStitch(row, stitch)}
-                className={stitchClass(props.patternRepeat, row, stitch)}>
+                onClick={() => clickedStitch(row, stitch)}
+                className={stitchClass(patternRepeat, row, stitch)}>
               </div>
             )
           }
