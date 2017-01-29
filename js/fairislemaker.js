@@ -40,18 +40,16 @@ var Repeat = (props) => {
     }
   }
 
-  var rows = [];
-  _.times(props.patternRepeat.rows, row => {
-    var stitches = [];
-    _.times(props.patternRepeat.stitches, stitch => {
+  var rows = _.times(props.patternRepeat.rows, row => {
+    var stitches = _.times(props.patternRepeat.stitches, stitch => {
       var classes = '';
       if (props.patternRepeat.getStitch(row, stitch)) {
         classes = 'pattern-colour';
       }
-      stitches.push(<div onClick={clickHandler(row, stitch)} className={classes}></div>);
+      return <div onClick={clickHandler(row, stitch)} className={classes}></div>;
     });
 
-    rows.push(<li>{stitches}</li>);
+    return <li>{stitches}</li>;
   });
 
   return (
