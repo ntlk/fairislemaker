@@ -1,0 +1,24 @@
+.repeat {
+  display: inline-block;
+}
+
+.repeat li {
+  border-top: 1px solid lightgrey;
+  border-left: 1px solid lightgrey;
+  height: 1em;
+}
+
+.repeat li:last-child {
+  border-bottom: 1px solid lightgrey;
+}
+
+.repeat li div {
+  display: inline-block;
+  height: 1em;
+  width: 1.2em;
+  border-right: 1px solid lightgrey;
+}
+
+.pattern-colour {
+  background: black;
+}

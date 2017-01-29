@@ -1,7 +1,16 @@
 class FairIsle extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { pattern: "this is the pattern" };
+    var pattern = new Array(props.rows);
+    for (var row = 0; row < props.rows; row++) {
+      var stitches = new Array(props.stitches);
+      for (var stitch = 0; stitch < props.stitches; stitch++) {
+        stitches[stitch] = Math.random() > 0.5;
+      }
+      pattern[row] = stitches;
+    }
+
+    this.state = { pattern: pattern };
   }
 
   render() {
@@ -14,10 +23,18 @@ class Repeat extends React.Component {
 
     var rows = [];
     for (var row = 0; row < this.props.rows; row++) {
-      rows.push(<li>a row</li>)
+      var stitches = [];
+      for (var stitch = 0; stitch < this.props.stitches; stitch++) {
+        var el = <div></div>;
+        if (this.props.pattern[row][stitch]) {
+          el = <div className="pattern-colour"></div>;
+        }
+        stitches.push(el);
+      }
+      rows.push(<li>{stitches}</li>);
     }
     return (
-      <ol>
+      <ol className="repeat">
         {rows}
       </ol>
     )
