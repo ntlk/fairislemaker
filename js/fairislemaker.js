@@ -18,20 +18,20 @@ class FairIsle extends React.Component {
       pattern[row] = stitches;
     }
 
-    var patternData = new Pattern(props.rows, props.stitches, pattern);
+    var pattern = new Pattern(props.rows, props.stitches, pattern);
 
-    this.state = { patternData };
+    this.state = { pattern };
     this.stitchClickHandler = this.stitchClickHandler.bind(this);
   }
 
   stitchClickHandler(row, stitch) {
-    var patternData = this.state.patternData;
-    patternData.data[row][stitch] = !patternData.data[row][stitch];
-    this.setState({ patternData });
+    var pattern = this.state.pattern;
+    pattern.data[row][stitch] = !pattern.data[row][stitch];
+    this.setState({ pattern });
   }
 
   render() {
-    return <Repeat patternData={this.state.patternData} clickedStitch={this.stitchClickHandler} />;
+    return <Repeat pattern={this.state.pattern} clickedStitch={this.stitchClickHandler} />;
   }
 }
 
@@ -51,11 +51,11 @@ class Repeat extends React.Component {
   render() {
 
     var rows = [];
-    for (var row = 0; row < this.props.patternData.rows; row++) {
+    for (var row = 0; row < this.props.pattern.rows; row++) {
       var stitches = [];
-      for (var stitch = 0; stitch < this.props.patternData.stitches; stitch++) {
+      for (var stitch = 0; stitch < this.props.pattern.stitches; stitch++) {
         var el = <div onClick={this.clickHandler(row, stitch)}></div>;
-        if (this.props.patternData.data[row][stitch]) {
+        if (this.props.pattern.data[row][stitch]) {
           el = <div className="pattern-colour" onClick={this.clickHandler(row, stitch)}></div>;
         }
         stitches.push(el);
