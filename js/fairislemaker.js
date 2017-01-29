@@ -1,5 +1,5 @@
 class Pattern {
-  constructor(rows, stitches, data) {
+  constructor(rows, stitches) {
     this.rows = rows;
     this.stitches = stitches;
     this.data  = new Array(this.rows);
@@ -10,6 +10,14 @@ class Pattern {
       }
       this.data[row] = stitches;
     }
+  }
+
+  getStitch(rowNumber, stitchNumber) {
+    return this.data[rowNumber][stitchNumber];
+  }
+
+  toggleStitch(rowNumber, stitchNumber) {
+    this.data[rowNumber][stitchNumber] = !this.data[rowNumber][stitchNumber];
   }
 }
 
@@ -23,7 +31,7 @@ class FairIsle extends React.Component {
 
   stitchClickHandler(row, stitch) {
     var pattern = this.state.pattern;
-    pattern.data[row][stitch] = !pattern.data[row][stitch];
+    pattern.toggleStitch(row, stitch);
     this.setState({ pattern });
   }
 
@@ -52,7 +60,7 @@ class Repeat extends React.Component {
       var stitches = [];
       for (var stitch = 0; stitch < this.props.pattern.stitches; stitch++) {
         var el = <div onClick={this.clickHandler(row, stitch)}></div>;
-        if (this.props.pattern.data[row][stitch]) {
+        if (this.props.pattern.getStitch(row, stitch)) {
           el = <div className="pattern-colour" onClick={this.clickHandler(row, stitch)}></div>;
         }
         stitches.push(el);
