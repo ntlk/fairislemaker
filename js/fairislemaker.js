@@ -40,37 +40,29 @@ class FairIsle extends React.Component {
   }
 }
 
-class Repeat extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.clickHandler = this.clickHandler.bind(this);
-  }
-
-  clickHandler(row, stitch) {
+var Repeat = (props) => {
+  var clickHandler = (row, stitch) => {
     return () => {
-      this.props.clickedStitch(row, stitch);
+      props.clickedStitch(row, stitch);
     }
   }
 
-  render() {
-
-    var rows = [];
-    for (var row = 0; row < this.props.patternRepeat.rows; row++) {
-      var stitches = [];
-      for (var stitch = 0; stitch < this.props.patternRepeat.stitches; stitch++) {
-        var classes = '';
-        if (this.props.patternRepeat.getStitch(row, stitch)) {
-          classes = 'pattern-colour';
-        }
-        stitches.push(<div onClick={this.clickHandler(row, stitch)} className={classes}></div>);
+  var rows = [];
+  for (var row = 0; row < props.patternRepeat.rows; row++) {
+    var stitches = [];
+    for (var stitch = 0; stitch < props.patternRepeat.stitches; stitch++) {
+      var classes = '';
+      if (props.patternRepeat.getStitch(row, stitch)) {
+        classes = 'pattern-colour';
       }
-      rows.push(<li>{stitches}</li>);
+      stitches.push(<div onClick={clickHandler(row, stitch)} className={classes}></div>);
     }
-    return (
-      <ol className="repeat">
-        {rows}
-      </ol>
-    )
+    rows.push(<li>{stitches}</li>);
   }
+
+  return (
+    <ol className="repeat">
+      {rows}
+    </ol>
+  )
 }
