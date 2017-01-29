@@ -2,14 +2,7 @@ class PatternRepeat {
   constructor(rows, stitches) {
     this.rows = rows;
     this.stitches = stitches;
-    this.data  = new Array(this.rows);
-    _.times(this.rows, row => {
-      var stitches = new Array(this.stitches);
-      _.times(this.stitches, stitch => {
-        stitches[stitch] = false;
-      });
-      this.data[row] = stitches;
-    });
+    this.data = _.times(rows, () => _.times(stitches, () => false));
   }
 
   getStitch(rowNumber, stitchNumber) {
